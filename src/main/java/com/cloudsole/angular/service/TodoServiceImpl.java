@@ -22,32 +22,26 @@ public class TodoServiceImpl implements TodoService {
         todos.add("Watch star wars again!!!");
     }
 
-    @Override
     public List<String> allTodos() {
         return todos;
     }
 
-    @Override
     public void addTodo(String todo) {
         if (!todos.contains(todo)){
             todos.add(todo);
         }
     }
 
-    @Override
     public void deleteTodo(String todo) {
         if (todos.contains(todo)){
             todos.remove(todo);
         }
     }
 
-    @Override
     public void deleteAll() {
         todos.clear();
     }
 
-
-    @Override
     public void updateTodo(int position, String todo) {
         todos.set(position, todo);
     }

@@ -10,45 +10,39 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cloudsole.angular.model.Department;
+import com.cloudsole.angular.model.Worker;
 
-@Repository("departmentDao")
-public class DepartmentImpl implements DepartmentDao {
+@Repository("workerDaoImpl")
+public class WorkerDaoImpl implements WorkerDao {
 	@PersistenceContext
 	private EntityManager em;
 
-	@Override
 	@Transactional
-	public void createDepartment(Department department) {
+	public void mergeWorker(Worker worker) {
 	    em = em.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction t = em.getTransaction();
 	    t.begin();
-	    Department dep = em.merge(department);
+	    Department deps = em.find(Department.class, worker.getDepartment().getId());
+//	    Department department = new Department();
+//	    department.setId(1);
+	    
+	    //worker.setDepartment(department);
+	    worker.setDepartment(deps);
+	    Worker w = em.merge(worker);
 	    t.commit();
 	}
 
-	@Override
 	@Transactional
-	public void updateDepartment(Department department) {
+	public void deleteWorker(long id){
 	    em = em.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction t = em.getTransaction();
 	    t.begin();
-	    Department dep = em.merge(department);
-	    t.commit();
-	}	
-	
-	
-	@Transactional
-	public void deleteDepartment(long id){
-	    em = em.getEntityManagerFactory().createEntityManager();
-	    EntityTransaction t = em.getTransaction();
-	    t.begin();
-	    Department department = em.find(Department.class, id);
-		em.remove(department);
+	    Worker worker = em.find(Worker.class, id);
+		em.remove(worker);
 	    t.commit();
 	}
 	
-	@Override
-	public List<Department> getAll() {
-		return em.createQuery("from Department", Department.class).getResultList();
+	public List<Worker> getAll() {
+		return em.createQuery("from Worker", Worker.class).getResultList();
 	}
 }

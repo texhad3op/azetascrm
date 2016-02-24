@@ -11,6 +11,10 @@ App.config(['$routeProvider', function ($routeProvider) {
         templateUrl: 'department/layout',
         controller: DepartmentController
     });
+    $routeProvider.when('/worker', {
+        templateUrl: 'worker/layout',
+        controller: WorkerController
+    });
     $routeProvider.when('/todo', {
         templateUrl: 'todo/layout',
         controller: TodoController

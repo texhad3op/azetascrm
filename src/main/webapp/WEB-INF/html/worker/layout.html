@@ -1,0 +1,100 @@
+<div class="container">
+	<div id="fui-button" class="pbl"></div>
+
+	<div class="demo-row">
+		<div class="demo-title">Workers</div>
+		<div class="demo-content">
+			<div class="alert alert-error" ng-show="error">{{errorMessage}}</div>
+			<div class="row">
+			
+			<pre>{{worker | json}}</pre>
+			
+				<form novalidate>
+					<div class="col-lg-8">
+						<input class="form-control" placeholder="Enter Name" type="text"
+							ng-model="worker.firstName" required min="1" /> <input
+							class="form-control" placeholder="Enter Address" type="text"
+							ng-model="worker.lastName" required min="1" /> <input
+							class="form-control" placeholder="Enter Description" type="text"
+							ng-model="worker.email" required min="1" /> <input
+							class="form-control" placeholder="Enter Description" type="text"
+							ng-model="worker.phone" required min="1" /> <input
+							class="form-control" placeholder="Enter Description" type="text"
+							ng-model="worker.description" required min="1" /> 
+
+<select ng-model="worker.department"
+							ng-options="department as department.name for department in departments" required></select>
+						<pre>{{worker.department | json}}</pre>
+
+					</div>
+				</form>
+
+				<button class="btn btn-primary" ng-disabled="!worker"
+					ng-hide="editMode" ng-click="addWorker(worker)">Add Entry</button>
+				<button type="btn btn-primary" class="btn btn-primary"
+					ng-disabled="!worker" ng-show="editMode"
+					ng-click="updateWorker(worker)">Save</button>
+				<button type="btn btn-primary" class="btn btn-primary"
+					ng-click="resetWorkerField()">Reset</button>
+			</div>
+			<hr />
+
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search"
+								id="search-query-3" ng-model="searchWorker"> <span
+								class="input-group-btn">
+								<button type="submit" class="btn">
+									<span class="fui-search"></span>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr />
+
+			<div class="alert alert-info"
+				style="width: 400px; margin-left: 100px;"
+				ng-show="departments.length == 0">No address book entry found
+			</div>
+			<table class="table table-bordered table-striped"
+				ng-show="workers.length > 0">
+				<thead>
+					<tr>
+						<th style="text-align: center; width: 25px;">Delete</th>
+						<th style="text-align: center; width: 25px;">Update</th>
+						<th style="text-align: center;"><a href=""
+							ng-click="reverse=!reverse;order('name', reverse)">Name</a></th>
+						<th style="text-align: center;"><a href=""
+							ng-click="reverse=!reverse;order('address', reverse)">Address</a></th>
+						<th style="text-align: center;"><a href=""
+							ng-click="reverse=!reverse;order('description', reverse)">Description</a></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="worker in workers | filter:searchWorker">
+						<td style="width: 70px; text-align: center;"><button
+								class="btn btn-mini btn-danger"
+								ng-click="deleteWorker(worker.id)">Delete</button></td>
+						<td style="width: 70px; text-align: center;"><button
+								class="btn btn-mini btn-danger" ng-click="editWorker(worker)">Update</button></td>
+						<td>{{worker.firstName}}</td>
+						<td>{{worker.lastName}}</td>
+						<td>{{worker.mail}}</td>
+						<td>{{worker.phone}}</td>
+						<td>{{worker.description}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<button class="btn btn-danger" ng-show="workers.length >= 1"
+				ng-click="deleteAllDepartments()">Delete All Departments</button>
+		</div>
+		<!-- /.demo-content -->
+	</div>
+	<!-- /.demo-row -->
+</div>
+<!-- /.container -->
+

@@ -27,7 +27,7 @@ public class DepartmentController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody void addAddressBookEntry(@RequestBody Department department) {
-		departmentDao.createDepartment(department);
+		departmentDao.mergeDepartment(department);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
@@ -37,13 +37,8 @@ public class DepartmentController {
 	
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public @ResponseBody void updateAddressBook(@RequestBody Department department) {
-		departmentDao.updateDepartment(department);
+		departmentDao.mergeDepartment(department);
 	}
-//
-//	@RequestMapping(value = "/delete/all", method = RequestMethod.DELETE)
-//	public @ResponseBody void deleteAllAddressBook() {
-//		departmentDao.deleteAllAddressBook();
-//	}
 
 	@RequestMapping("/layout")
 	public String getTodoPartialPage() {
