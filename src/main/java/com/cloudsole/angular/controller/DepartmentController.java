@@ -22,22 +22,23 @@ public class DepartmentController {
 
 	@RequestMapping(value = "/all.json", method = RequestMethod.GET)
 	public @ResponseBody List<Department> viewAllDepartment() {
-		return departmentDao.getAll();
+		//return departmentDao.getAll();
+		return departmentDao.getAll(Department.class);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody void addAddressBookEntry(@RequestBody Department department) {
-		departmentDao.mergeDepartment(department);
+		departmentDao.merge(department);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public @ResponseBody void deleteAddressBookEntry(@PathVariable("id") String id) {
-		departmentDao.deleteDepartment(Long.valueOf(id));
+		departmentDao.remove(Long.valueOf(id), Department.class);
 	}	
 	
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public @ResponseBody void updateAddressBook(@RequestBody Department department) {
-		departmentDao.mergeDepartment(department);
+		departmentDao.merge(department);
 	}
 
 	@RequestMapping("/layout")

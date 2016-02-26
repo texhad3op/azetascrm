@@ -2,14 +2,18 @@ package com.cloudsole.angular.service;
 
 import java.util.List;
 
+import javax.persistence.EntityTransaction;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import com.cloudsole.angular.model.Department;
 import com.cloudsole.angular.model.Worker;
 
 public interface DepartmentDao {
-	public void mergeDepartment(Department department);
+	Department merge(Department department);
 
-	public List<Department> getAll();
+	void remove(long id, Class<Department> d);
 
-	public void deleteDepartment(long id);
+	List<Department> getAll(Class<Department> d);
 
 }

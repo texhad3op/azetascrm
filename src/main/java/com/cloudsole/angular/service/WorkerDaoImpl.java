@@ -23,10 +23,7 @@ public class WorkerDaoImpl implements WorkerDao {
 	    EntityTransaction t = em.getTransaction();
 	    t.begin();
 	    Department deps = em.find(Department.class, worker.getDepartment().getId());
-//	    Department department = new Department();
-//	    department.setId(1);
-	    
-	    //worker.setDepartment(department);
+
 	    worker.setDepartment(deps);
 	    Worker w = em.merge(worker);
 	    t.commit();
