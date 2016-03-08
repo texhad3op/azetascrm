@@ -5,18 +5,18 @@
 
 var WorkerController = function($scope, $http){
 /*
-	$scope.items = [
-	                { id: 1, name: 'foo' },
-	                { id: 2, name: 'bar' },
-	                { id: 3, name: 'blah' }
-	              ];
-	*/	
 	$scope.departments = [
-	                { id: 1, name: 'first' },
-	                { id: 2, name: 'second' },
-	                { id: 3, name: 'third' }
+	                { id: 1, name: 'first' , address: 'adr1'},
+	                { id: 2, name: 'second', address: 'adr2' },
+	                { id: 3, name: 'third', address: 'adr3' }
 	              ];
-
+*/
+	
+	
+    $http.get('department/all.json').success(function(response){
+        $scope.departments = response;
+    })
+    
     $scope.editMode = false;
 
     $scope.viewAllWorkers = function(){
@@ -76,6 +76,9 @@ var WorkerController = function($scope, $http){
 
     $scope.editWorker = function(worker){
         $scope.worker = worker;
+        
+        $scope.worker.department = $scope.departments[2];
+        
         $scope.editMode = true;
     }
 

@@ -6,9 +6,9 @@
 		<div class="demo-content">
 			<div class="alert alert-error" ng-show="error">{{errorMessage}}</div>
 			<div class="row">
-			
-			<pre>{{worker | json}}</pre>
-			
+
+				<pre>{{worker | json}}</pre>
+
 				<form novalidate>
 					<div class="col-lg-8">
 						<input class="form-control" placeholder="Enter Name" type="text"
@@ -21,9 +21,9 @@
 							ng-model="worker.phone" required min="1" /> <input
 							class="form-control" placeholder="Enter Description" type="text"
 							ng-model="worker.description" required min="1" /> 
-
-<select ng-model="worker.department"
-							ng-options="department as department.name for department in departments" required></select>
+							<select 
+							ng-model="worker.department" ng-options="department.name for department in departments track by department.id"
+							required></select>
 						<pre>{{worker.department | json}}</pre>
 
 					</div>

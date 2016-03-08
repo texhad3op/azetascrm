@@ -8,12 +8,15 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cloudsole.angular.model.Department;
-
 public abstract class AbstractService<E> {
 	@PersistenceContext
 	private EntityManager em;
-	Class<E> eee;
+
+	protected Class<E> clazz;
+
+	public AbstractService(Class<E> clazz) {
+		this.clazz = clazz;
+	}
 
 	@Transactional
 	public E merge(E e) {
@@ -26,16 +29,20 @@ public abstract class AbstractService<E> {
 	}
 
 	@Transactional
-	public void remove(long id, Class<E> e) {
+	public void remove(long id) {
 		em = em.getEntityManagerFactory().createEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
-		E entity = em.find(e, id);
+		E entity = em.find(clazz, id);
 		em.remove(entity);
 		t.commit();
 	}
 
-	public List<E> getAll(Class<E> e) {
-		return em.createQuery("from " + e.getName(), e).getResultList();
+	public List<E> getAll() {
+		return em.createQuery("from " + clazz.getName(), clazz).getResultList();
+	}
+
+	public E find(long id) {
+		return em.find(clazz, id);
 	}
 }

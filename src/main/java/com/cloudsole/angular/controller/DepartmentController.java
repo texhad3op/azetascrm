@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cloudsole.angular.model.AddressBook;
 import com.cloudsole.angular.model.Department;
 import com.cloudsole.angular.service.DepartmentDao;
 
@@ -22,8 +21,7 @@ public class DepartmentController {
 
 	@RequestMapping(value = "/all.json", method = RequestMethod.GET)
 	public @ResponseBody List<Department> viewAllDepartment() {
-		//return departmentDao.getAll();
-		return departmentDao.getAll(Department.class);
+		return departmentDao.getAll();
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -33,9 +31,9 @@ public class DepartmentController {
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public @ResponseBody void deleteAddressBookEntry(@PathVariable("id") String id) {
-		departmentDao.remove(Long.valueOf(id), Department.class);
-	}	
-	
+		departmentDao.remove(Long.valueOf(id));
+	}
+
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public @ResponseBody void updateAddressBook(@RequestBody Department department) {
 		departmentDao.merge(department);

@@ -28,10 +28,6 @@ public class WorkerController {
 		return workerDao.getAll();
 	}
 
-//	@RequestMapping(value = "/add", method = RequestMethod.POST)
-//	public @ResponseBody void addAddressBookEntry(@RequestBody Worker worker) {
-//		workerDao.mergeWorker(worker);
-//	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST, consumes="application/json")
 	public @ResponseBody void addOrder(@RequestBody String json) {
@@ -42,7 +38,7 @@ public class WorkerController {
 
 	    	Worker worker = mapper.readValue(json, Worker.class);
 			System.out.println();
-			workerDao.mergeWorker(worker);
+			workerDao.merge(worker);
 
 	    } catch (JsonGenerationException e) {
 
@@ -62,12 +58,12 @@ public class WorkerController {
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public @ResponseBody void deleteWorker(@PathVariable("id") String id) {
-		workerDao.deleteWorker(Long.valueOf(id));
+		workerDao.remove(Long.valueOf(id));
 	}	
 	
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public @ResponseBody void updateAddressBook(@RequestBody Worker worker) {
-		workerDao.mergeWorker(worker);
+		workerDao.merge(worker);
 	}
 
 	@RequestMapping("/layout")

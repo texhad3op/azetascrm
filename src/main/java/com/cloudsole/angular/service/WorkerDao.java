@@ -5,9 +5,10 @@ import java.util.List;
 import com.cloudsole.angular.model.Worker;
 
 public interface WorkerDao {
-	public void mergeWorker(Worker worker);
+	 Worker merge(Worker worker);
 
-	public List<Worker> getAll();
+	 List<Worker> getAll();
 
-	public void deleteWorker(long id);
+	 void remove(long id);
+
 }
